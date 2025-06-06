@@ -36,10 +36,10 @@ You can start with downloading the [Community edition of ERSK](https://korzh.com
 
 If you already have either a Community or Pro edition installed here are the articles that will help you to start:
 
- * [Getting started](//easy-report-starter-kit/docs/setup-first-launch)
+ * [Getting started](/easy-report-starter-kit/docs/setup-first-launch)
 
- * [Basic concepts](//easy-report-starter-kit/docs/basic-concepts)
+ * [Basic concepts](/easy-report-starter-kit/docs/basic-concepts)
 
- * [Solution structure](//easy-report-starter-kit/docs/solution-structure)
+ * [Solution structure](/easy-report-starter-kit/docs/solution-structure)
 
- * [Startup class explained](//easy-report-starter-kit/docs/startup-class-explained)
+ * [Startup class explained](/easy-report-starter-kit/docs/startup-class-explained)
