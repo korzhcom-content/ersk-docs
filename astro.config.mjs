@@ -7,9 +7,9 @@ import { rehypeLinks } from './plugins/rehype-links';
 import { updateFrontmatter } from './plugins/update-frontmatter';
 import getSidebar from "./tools/get-sidebar.js"
 
-const base = 'component/docs';
+const base = 'easy-report-starter-kit/docs';
 const site = 'https://korzh.com';
-const outDir = './dist/component/docs';
+const outDir = './dist/easy-report-starter-kit/docs';
 
 // https://astro.build/config
 export default defineConfig({
@@ -19,7 +19,7 @@ export default defineConfig({
 	trailingSlash: "never",
 	integrations: [
 		starlight({
-			title: 'Component.Name',
+			title: 'EasyReport Starter Kit',
 			logo: {
 				dark : './src/assets/korzh-docs-white.png',
 				light: './src/assets/korzh-docs-black.png',
@@ -27,9 +27,12 @@ export default defineConfig({
 			favicon: '/favicon.ico',
 			social: [],
 			sidebar: [
-				// { label: "Introduction", slug: "introduction" },
-				...getSidebar("./src/content/docs/getting-started", true),
-				...getSidebar("./src/content/docs/sorting", false),
+				{ label: "Overview", slug: "overview" },
+				{ label: "Overview", slug: "setup-first-launch" },
+				{ label: "Basic Concepts", slug: "basic-concepts" },
+				{ label: "Solution Structure", slug: "solution-structure" },
+				{ label: "Startup Class Explained", slug: "startup-class-explained" },
+				...getSidebar("./src/content/docs/tutorials", true),
 			],
 			customCss: [
 				'./src/styles/index.css',
