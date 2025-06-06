@@ -7,7 +7,7 @@ export default [
     {
         id: 2,
         label: "Demo",
-        link: "https://demo.korzh.com/easyquery-asp-net-core-razor",
+        link: "https://easy.report",
     },
     {
         id: 3,
