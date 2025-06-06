@@ -1,0 +1,7 @@
+[[redirects]]
+  from = "/"
+  to = "/easy-report-starter-kit/docs/overview"
+
+[[redirects]]
+  from = "/easy-report-starter-kit/docs/setting-multi-tenancy"
+  to = "/easy-report-starter-kit/docs/tutorials/setting-multi-tenancy"
