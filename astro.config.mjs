@@ -21,14 +21,14 @@ export default defineConfig({
 		starlight({
 			title: 'EasyReport Starter Kit',
 			logo: {
-				dark : './src/assets/korzh-docs-white.png',
+				dark: './src/assets/korzh-docs-white.png',
 				light: './src/assets/korzh-docs-black.png',
 			},
 			favicon: '/favicon.ico',
 			social: [],
 			sidebar: [
 				{ label: "Overview", slug: "overview" },
-				{ label: "Overview", slug: "setup-first-launch" },
+				{ label: "Getting started", slug: "setup-first-launch" },
 				{ label: "Basic Concepts", slug: "basic-concepts" },
 				{ label: "Solution Structure", slug: "solution-structure" },
 				{ label: "Startup Class Explained", slug: "startup-class-explained" },
