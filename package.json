@@ -8,7 +8,7 @@
     "build": "node tools/add-indexes.js ./src/content/docs && astro build",
     "preview": "astro preview",
     "astro": "astro",
-    "check": "spider http://localhost:4321/component/docs"
+    "check": "spider http://localhost:4321/easy-report-starter-kit/docs"
   },
   "dependencies": {
     "@astrojs/starlight": "^0.34.3",
