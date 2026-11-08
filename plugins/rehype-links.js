@@ -13,8 +13,15 @@ export const rehypeLinks = (options) => {
             if (node.tagName === "a") {
                 let href = node.properties.href;
                 
-                if (href.startsWith("http")) {
-                    return 
+                // Leave absolute URLs, in-page anchors, queries and other schemes alone
+                if (
+                    typeof href !== "string" ||
+                    href.startsWith("http") ||
+                    href.startsWith("#") ||
+                    href.startsWith("?") ||
+                    /^[a-z][a-z0-9+.-]*:/i.test(href)
+                ) {
+                    return
                 }
                 
                 if (!href.startsWith("http")) {
