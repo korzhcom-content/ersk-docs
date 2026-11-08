@@ -6,6 +6,7 @@ import starlightImageZoom from 'starlight-image-zoom'
 import { rehypeLinks } from './plugins/rehype-links';
 import { updateFrontmatter } from './plugins/update-frontmatter';
 import getSidebar from "./tools/get-sidebar.js"
+import analyticsHead from "./tools/analytics.js"
 
 const base = 'easy-report-starter-kit/docs';
 const site = 'https://korzh.com';
@@ -25,6 +26,7 @@ export default defineConfig({
 				light: './src/assets/korzh-docs-black.png',
 			},
 			favicon: '/favicon.ico',
+			head: analyticsHead,
 			social: [],
 			sidebar: [
 				{ label: "Overview", slug: "overview" },
