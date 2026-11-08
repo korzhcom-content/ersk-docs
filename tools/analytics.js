@@ -1,58 +1,40 @@
 /*
- * Analytics for the docs: a visit count for korzh.com's own collector, and Google Analytics
- * through the same Tag Manager container the main website uses.
+ * Analytics for the docs: the main website's own collector script, and Google Analytics through
+ * the same Tag Manager container the website uses.
  *
  * The docs are served to readers through korzh.com, whose _redirects proxies the docs paths to
  * this site on Netlify. The proxied HTML is ours, not the website's layout, so nothing the
  * website adds reaches a docs page unless this site adds it too.
  *
- * Both scripts run on korzh.com only. This site is also reachable on its own netlify.app address
- * and on deploy previews, which are not readers, and a developer running the docs locally is not
- * a visitor either.
+ * The collector script is not copied here: it is the website's /assets/js/analytics.js
+ * (korzhcom-website, source/assets/js/analytics.js), loaded from korzh.com itself. That path lies
+ * outside the docs paths, so the website serves it directly. It counts the page view through
+ * /t/hit and keeps the UTM campaign the visitor arrived with. If the website moves or renames
+ * that file, the docs stop counting without any error - change this along with it.
  *
- * The scripts are inlined into every page through Starlight's `head` option rather than served
- * as files: a file would sit under the docs base path and depend on the proxy to reach it.
+ * Both scripts load on korzh.com only. This site is also reachable on its own netlify.app address
+ * and on deploy previews, which are not readers and where /assets/js/analytics.js does not exist,
+ * and a developer running the docs locally is not a visitor either.
+ *
+ * The loaders are inlined into every page through Starlight's `head` option.
  */
 
+const COLLECTOR_SCRIPT = "/assets/js/analytics.js";
 const GTM_CONTAINER = "GTM-KWL8N67";
 
-/*
- * Counts the visit. Posts to /t/hit on korzh.com itself - the website rewrites /t/* to the
- * collector on account.korzh.com - so the call is a same-origin one.
- *
- * Nothing is stored in the browser and no identifier is sent: the collector counts a visitor by a
- * hash it builds itself from a daily secret, the address and the browser.
- */
-function countVisit() {
+/* Loads the website's collector script, which reports the page view as soon as it runs. */
+function loadCollector(src) {
     var host = window.location.hostname;
     if (host !== "korzh.com" && host !== "www.korzh.com") {
         return;
     }
 
-    try {
-        var body = JSON.stringify({
-            site: host,
-            path: window.location.pathname,
-            referrer: document.referrer,
-        });
+    var script = document.createElement("script");
+    script.async = true;
+    script.src = src;
 
-        // text/plain is what sendBeacon sends
-        if (navigator.sendBeacon) {
-            navigator.sendBeacon("/t/hit", new Blob([body], { type: "text/plain" }));
-            return;
-        }
-
-        fetch("/t/hit", {
-            method: "POST",
-            headers: { "Content-Type": "text/plain" },
-            body: body,
-            keepalive: true,
-        }).catch(function () {
-            /* the docs must never break over analytics */
-        });
-    } catch (e) {
-        /* the docs must never break over analytics */
-    }
+    var first = document.getElementsByTagName("script")[0];
+    first.parentNode.insertBefore(script, first);
 }
 
 /* Google Tag Manager's standard loader, behind the same host check. */
@@ -74,6 +56,6 @@ function loadTagManager(container) {
 }
 
 export default [
-    { tag: "script", content: `(${countVisit.toString()})();` },
+    { tag: "script", content: `(${loadCollector.toString()})(${JSON.stringify(COLLECTOR_SCRIPT)});` },
     { tag: "script", content: `(${loadTagManager.toString()})(${JSON.stringify(GTM_CONTAINER)});` },
 ];
